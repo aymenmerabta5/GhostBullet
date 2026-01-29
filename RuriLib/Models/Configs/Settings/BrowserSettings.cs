@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace RuriLib.Models.Configs.Settings
@@ -12,5 +12,6 @@ namespace RuriLib.Models.Configs.Settings
         public bool LoadOnlyDocumentAndScript { get; set; } = false;
         public bool DismissDialogs { get; set; } = false;
         public List<string> BlockedUrls { get; set; } = new();
+        public bool StealthMode { get; set; } = true;
     }
 }

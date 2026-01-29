@@ -1,4 +1,4 @@
-﻿using RuriLib.Attributes;
+using RuriLib.Attributes;
 using RuriLib.Logging;
 using RuriLib.Models.Bots;
 
@@ -8,6 +8,7 @@ using RuriLib.Models.Settings;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 using System.Linq;
 using System.Drawing;
@@ -56,9 +57,29 @@ namespace RuriLib.Blocks.Selenium.Browser
                         chromeop.AddArgument("--disable-dev-shm-usage");
                     }
 
+                    // Add stealth mode arguments for anti-bot detection
+                    if (data.ConfigSettings.BrowserSettings.StealthMode)
+                    {
+                        // Remove automation flags
+                        chromeop.AddExcludedArgument("enable-automation");
+                        
+                        // Anti-detection arguments
+                        chromeop.AddArgument("--disable-blink-features=AutomationControlled");
+                        chromeop.AddArgument("--disable-dev-shm-usage");
+                        chromeop.AddArgument("--no-first-run");
+                        chromeop.AddArgument("--no-default-browser-check");
+                        chromeop.AddArgument("--disable-infobars");
+                        chromeop.AddArgument("--disable-features=IsolateOrigins,site-per-process");
+                        chromeop.AddArgument("--window-size=1920,1080");
+                        
+                        // Disable automation extension via user profile preference
+                        chromeop.AddUserProfilePreference("credentials_enable_service", false);
+                        chromeop.AddUserProfilePreference("profile.password_manager_enabled", false);
+                    }
+
                     if (data.ConfigSettings.BrowserSettings.Headless)
                     {
-                        chromeop.AddArgument("--headless");
+                        chromeop.AddArgument("--headless=new");
                     }
 
                     if (data.ConfigSettings.BrowserSettings.DismissDialogs)
@@ -85,7 +106,15 @@ namespace RuriLib.Blocks.Selenium.Browser
                         chromeop.AddArgument($"--proxy-server={data.Proxy.Type.ToString().ToLower()}://{data.Proxy.Host}:{data.Proxy.Port}");
                     }
 
-                    data.SetObject("selenium", new ChromeDriver(chromeservice, chromeop));
+                    var chromeDriver = new ChromeDriver(chromeservice, chromeop);
+                    
+                    // Apply CDP commands to hide webdriver property when stealth mode is enabled
+                    if (data.ConfigSettings.BrowserSettings.StealthMode)
+                    {
+                        ApplyChromeAntiDetection(chromeDriver);
+                    }
+                    
+                    data.SetObject("selenium", chromeDriver);
                     break;
 
                 case SeleniumBrowserType.Firefox:
@@ -101,6 +130,23 @@ namespace RuriLib.Blocks.Selenium.Browser
                     if (Utils.IsDocker())
                     {
                         fireop.AddArgument("--whitelisted-ips=''");
+                    }
+
+                    // Add stealth mode preferences for anti-bot detection
+                    if (data.ConfigSettings.BrowserSettings.StealthMode)
+                    {
+                        // Disable webdriver detection
+                        fireprofile.SetPreference("dom.webdriver.enabled", false);
+                        fireprofile.SetPreference("useAutomationExtension", false);
+                        
+                        // Additional anti-detection preferences
+                        fireprofile.SetPreference("media.navigator.permission.disabled", true);
+                        fireprofile.SetPreference("privacy.trackingprotection.enabled", false);
+                        fireprofile.SetPreference("privacy.trackingprotection.pbmode.enabled", false);
+                        
+                        // Set window size via argument
+                        fireop.AddArgument("--width=1920");
+                        fireop.AddArgument("--height=1080");
                     }
 
                     if (data.ConfigSettings.BrowserSettings.Headless)
@@ -287,6 +333,62 @@ namespace RuriLib.Blocks.Selenium.Browser
             {
                 data.ADDRESS = browser.Url;
                 data.SOURCE = browser.PageSource;
+            }
+        }
+
+        /// <summary>
+        /// Applies Chrome DevTools Protocol commands to hide automation indicators.
+        /// </summary>
+        private static void ApplyChromeAntiDetection(ChromeDriver driver)
+        {
+            try
+            {
+                // JavaScript to remove webdriver property and other automation indicators
+                var antiDetectionScript = @"
+                    Object.defineProperty(navigator, 'webdriver', {
+                        get: () => undefined
+                    });
+                    
+                    // Patch chrome object
+                    window.chrome = {
+                        runtime: {}
+                    };
+                    
+                    // Override permissions query
+                    const originalQuery = window.navigator.permissions.query;
+                    window.navigator.permissions.query = (parameters) => (
+                        parameters.name === 'notifications' ?
+                            Promise.resolve({ state: Notification.permission }) :
+                            originalQuery(parameters)
+                    );
+                    
+                    // Remove $cdc_ variable that ChromeDriver adds
+                    Object.defineProperty(document, '$cdc_asdjflasutopfhvcZLmcfl_', {
+                        get: () => undefined
+                    });
+                    
+                    // Override plugins to appear more realistic
+                    Object.defineProperty(navigator, 'plugins', {
+                        get: () => [1, 2, 3, 4, 5]
+                    });
+                    
+                    // Override languages
+                    Object.defineProperty(navigator, 'languages', {
+                        get: () => ['en-US', 'en']
+                    });
+                ";
+
+                // Use CDP to inject script on every new document
+                var parameters = new Dictionary<string, object>
+                {
+                    { "source", antiDetectionScript }
+                };
+
+                driver.ExecuteCdpCommand("Page.addScriptToEvaluateOnNewDocument", parameters);
+            }
+            catch
+            {
+                // CDP might not be available in all environments, fail silently
             }
         }
     }

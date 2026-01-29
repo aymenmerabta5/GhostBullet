@@ -1,4 +1,4 @@
-﻿using Yove.Proxy;
+using Yove.Proxy;
 using PuppeteerExtraSharp;
 using PuppeteerExtraSharp.Plugins.ExtraStealth;
 using PuppeteerSharp;
@@ -45,6 +45,18 @@ namespace RuriLib.Blocks.Puppeteer.Browser
                 args += " --no-sandbox";
             }
 
+            // Add stealth mode arguments for anti-bot detection
+            if (data.ConfigSettings.BrowserSettings.StealthMode)
+            {
+                args += " --disable-blink-features=AutomationControlled";
+                args += " --disable-features=IsolateOrigins,site-per-process";
+                args += " --disable-dev-shm-usage";
+                args += " --no-first-run";
+                args += " --no-default-browser-check";
+                args += " --disable-infobars";
+                args += " --window-size=1920,1080";
+            }
+
             if (data.Proxy != null && data.UseProxy)
             {
                 if (data.Proxy.Type == ProxyType.Http || !data.Proxy.NeedsAuthentication)
@@ -75,7 +87,12 @@ namespace RuriLib.Blocks.Puppeteer.Browser
 
             // Add the plugins
             var extra = new PuppeteerExtra();
-            extra.Use(new StealthPlugin());
+            
+            // Add stealth plugin for anti-bot detection when stealth mode is enabled
+            if (data.ConfigSettings.BrowserSettings.StealthMode)
+            {
+                extra.Use(new StealthPlugin());
+            }
 
             // Launch the browser
             var browser = await extra.LaunchAsync(launchOptions);

@@ -1,4 +1,4 @@
-﻿namespace OpenBullet2.Web.Dtos.Config.Settings;
+namespace OpenBullet2.Web.Dtos.Config.Settings;
 
 /// <summary>
 /// DTO that contains a config's browser settings.

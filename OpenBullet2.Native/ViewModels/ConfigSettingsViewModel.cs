@@ -1,4 +1,4 @@
-﻿using OpenBullet2.Core.Services;
+using OpenBullet2.Core.Services;
 using RuriLib.Models.Configs;
 using RuriLib.Models.Configs.Settings;
 using RuriLib.Models.Data.Resources.Options;
@@ -231,6 +231,16 @@ namespace OpenBullet2.Native.ViewModels
             set
             {
                 Puppeteer.Headless = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool StealthMode
+        {
+            get => Puppeteer.StealthMode;
+            set
+            {
+                Puppeteer.StealthMode = value;
                 OnPropertyChanged();
             }
         }
