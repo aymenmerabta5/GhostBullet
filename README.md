@@ -1,17 +1,17 @@
 ![Logo](https://i.imgur.com/sToEkJC.png)
 
-OpenBullet 2 is a cross-platform automation suite powered by .NET. It allows to perform requests towards a target webapp and offers a lot of tools to work with the results. This software can be used for **scraping** and **parsing data**, automated **penetration testing** and much more.
+GhostBullet is a cross-platform automation suite powered by .NET. It allows to perform requests towards a target webapp and offers a lot of tools to work with the results. This software can be used for **scraping** and **parsing data**, automated **penetration testing** and much more.
 
 ## ⚠️ Disclaimer
 Performing (D)DoS or credential stuffing attacks on sites you do not have permission to test is **illegal!** The developer will not be held responsible for improper use of this software.
 
 ## 📚 Documentation
-For detailed information on how to get started with **OpenBullet 2**, check out the [documentation](https://docs.openbullet.dev).
+For detailed information on how to get started with **GhostBullet**, check out the [documentation](https://docs.openbullet.dev).
 
 [![Docs](https://img.shields.io/badge/Docs-Read_the_Docs-2292A4.svg)](https://docs.openbullet.dev)
 
 ## 🌐 Community
-Join our community to discuss and share your experiences with **OpenBullet 2**.
+Join our community to discuss and share your experiences with **GhostBullet**.
 
 [![Forum](https://img.shields.io/badge/Forum-Join_the_community-2292A4.svg)](https://discourse.openbullet.dev/)
 

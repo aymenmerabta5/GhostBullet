@@ -1,4 +1,4 @@
-﻿using RuriLib.Exceptions;
+using RuriLib.Exceptions;
 using RuriLib.Extensions;
 using RuriLib.Helpers.CSharp;
 using RuriLib.Helpers.LoliCode;
@@ -381,7 +381,17 @@ namespace RuriLib.Models.Blocks.Custom
             writer.Write("AlwaysSendContent = " + GetSettingValue("alwaysSendContent") + ", ");
             writer.Write("DecodeHtml = " + GetSettingValue("decodeHtml") + ", ");
             writer.Write("UseCustomCipherSuites = " + GetSettingValue("useCustomCipherSuites") + ", ");
-            writer.Write("CustomCipherSuites = " + GetSettingValue("customCipherSuites") + " ");
+            writer.Write("CustomCipherSuites = " + GetSettingValue("customCipherSuites") + ", ");
+            // TLS Client Options
+            writer.Write("TlsClientOptions = new RuriLib.Functions.Http.TlsClientOptions { ");
+            writer.Write("UseNativeEngine = " + GetSettingValue("tlsClientUseNativeEngine") + ", ");
+            writer.Write("BrowserProfile = " + GetSettingValue("tlsClientProfile") + ", ");
+            writer.Write("Ja3Fingerprint = " + GetSettingValue("tlsClientJa3") + ", ");
+            writer.Write("ForceHttp1 = " + GetSettingValue("tlsClientForceHttp1") + ", ");
+            writer.Write("InsecureSkipVerify = " + GetSettingValue("tlsClientInsecureSkipVerify") + ", ");
+            writer.Write("IncludeClientHints = " + GetSettingValue("tlsClientIncludeClientHints") + ", ");
+            writer.Write("CustomExtensions = " + GetSettingValue("tlsClientCustomExtensions") + " ");
+            writer.Write("} ");
 
             writer.WriteLine("}).ConfigureAwait(false);");
 

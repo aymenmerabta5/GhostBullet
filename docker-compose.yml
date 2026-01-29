@@ -1,7 +1,7 @@
 services:
-    openbullet2:
-        image: 'openbullet/openbullet2:latest'
-        container_name: openbullet2
+    ghostbullet:
+        image: 'ghostbullet/ghostbullet:latest'
+        container_name: ghostbullet
         restart: unless-stopped
         volumes:
         # Change UserData to the location of where you want UserData folder to be placed

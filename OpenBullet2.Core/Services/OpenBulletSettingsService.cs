@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using OpenBullet2.Core.Models.Settings;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OpenBullet2.Core.Services;
 
 /// <summary>
-/// Provides interaction with settings of the OpenBullet 2 application.
+/// Provides interaction with settings of the GhostBullet application.
 /// </summary>
 public class OpenBulletSettingsService
 {

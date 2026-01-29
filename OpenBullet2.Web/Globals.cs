@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace OpenBullet2.Web;
+namespace GhostBullet.Web;
 
 internal static class Globals
 {

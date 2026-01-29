@@ -1,4 +1,4 @@
-﻿using OpenBullet2.Native.ViewModels;
+using OpenBullet2.Native.ViewModels;
 using RuriLib.Models.Blocks.Custom;
 using RuriLib.Models.Blocks.Custom.HttpRequest;
 using System;
@@ -80,6 +80,11 @@ namespace OpenBullet2.Native.Controls
             securityProtocolSetting.Setting = vm.HttpRequestBlock.Settings["securityProtocol"];
             useCustomCipherSuitesSetting.Setting = vm.HttpRequestBlock.Settings["useCustomCipherSuites"];
             customCipherSuitesSetting.Setting = vm.HttpRequestBlock.Settings["customCipherSuites"];
+
+            // TLS Client settings (simplified)
+            tlsClientProfileSetting.Setting = vm.HttpRequestBlock.Settings["tlsClientProfile"];
+            tlsClientForceHttp1Setting.Setting = vm.HttpRequestBlock.Settings["tlsClientForceHttp1"];
+            tlsClientInsecureSkipVerifySetting.Setting = vm.HttpRequestBlock.Settings["tlsClientInsecureSkipVerify"];
         }
     }
 

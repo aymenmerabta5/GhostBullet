@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib", "RuriLib\RuriLib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib.Tests", "RuriLib.Tests\RuriLib.Tests.csproj", "{3FFDD478-98AE-4855-90EF-7A8C9250B004}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBullet2.Console", "OpenBullet2.Console\OpenBullet2.Console.csproj", "{63576932-B89D-4CBD-B59E-E52DBE89B9A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostBullet.Console", "GhostBullet.Console\GhostBullet.Console.csproj", "{63576932-B89D-4CBD-B59E-E52DBE89B9A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0856422-6DC8-4D9C-BF4F-30DBD4258C8E}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,21 +22,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib.Proxies.Tests", "Ru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib.Http.Tests", "RuriLib.Http.Tests\RuriLib.Http.Tests.csproj", "{84E251A1-9F3E-45F7-AD66-AEB254093572}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBullet2.Web.Updater", "OpenBullet2.Web.Updater\OpenBullet2.Web.Updater.csproj", "{D82CA559-25C3-484F-8E18-22F0B2EC0322}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostBullet.Web.Updater", "GhostBullet.Web.Updater\GhostBullet.Web.Updater.csproj", "{D82CA559-25C3-484F-8E18-22F0B2EC0322}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib.Parallelization", "RuriLib.Parallelization\RuriLib.Parallelization.csproj", "{C341976A-B669-40E8-A468-67518F381A0B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuriLib.Parallelization.Tests", "RuriLib.Parallelization.Tests\RuriLib.Parallelization.Tests.csproj", "{09E3D17D-29BE-4C96-A504-92D9406B2E4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBullet2.Core", "OpenBullet2.Core\OpenBullet2.Core.csproj", "{6D601FCE-D6E9-459B-96D8-27B998425950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostBullet.Core", "GhostBullet.Core\GhostBullet.Core.csproj", "{6D601FCE-D6E9-459B-96D8-27B998425950}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBullet2.Native", "OpenBullet2.Native\OpenBullet2.Native.csproj", "{AF4F29CC-3C09-45FE-9B25-2001694EDF34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostBullet.Native", "GhostBullet.Native\GhostBullet.Native.csproj", "{AF4F29CC-3C09-45FE-9B25-2001694EDF34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBullet2.Native.Updater", "OpenBullet2.Native.Updater\OpenBullet2.Native.Updater.csproj", "{9D1622CE-8945-40D3-9C09-DA3C07F91F7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostBullet.Native.Updater", "GhostBullet.Native.Updater\GhostBullet.Native.Updater.csproj", "{9D1622CE-8945-40D3-9C09-DA3C07F91F7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBullet2.Web", "OpenBullet2.Web\OpenBullet2.Web.csproj", "{DB95BE95-065B-4C2C-A66B-EC9F9A004C10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostBullet.Web", "GhostBullet.Web\GhostBullet.Web.csproj", "{DB95BE95-065B-4C2C-A66B-EC9F9A004C10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBullet2.Web.Tests", "OpenBullet2.Web.Tests\OpenBullet2.Web.Tests.csproj", "{6E6DED07-842B-4276-B26A-1FA676DAE831}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostBullet.Web.Tests", "GhostBullet.Web.Tests\GhostBullet.Web.Tests.csproj", "{6E6DED07-842B-4276-B26A-1FA676DAE831}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

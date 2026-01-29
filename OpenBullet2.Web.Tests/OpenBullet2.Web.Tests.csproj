@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\OpenBullet2.Web\OpenBullet2.Web.csproj"/>
+        <ProjectReference Include="..\GhostBullet.Web\GhostBullet.Web.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

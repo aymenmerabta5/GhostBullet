@@ -59,7 +59,7 @@ namespace RuriLib.Functions.Http
             };
         }
 
-        private static ProxyClient GetProxyClient(Proxy proxy, HttpOptions options)
+        public static ProxyClient GetProxyClient(Proxy proxy, HttpOptions options)
         {
             ProxyClient client;
 

@@ -41,11 +41,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Download and unpack the latest OpenBullet2.Web release
-RUN wget https://github.com/openbullet/openbullet2/releases/latest/download/OpenBullet2.Web.zip \
-    && unzip OpenBullet2.Web.zip \
-    && rm OpenBullet2.Web.zip
+# Download and unpack the latest GhostBullet.Web release
+RUN wget https://github.com/ghostbullet/ghostbullet/releases/latest/download/GhostBullet.Web.zip \
+    && unzip GhostBullet.Web.zip \
+    && rm GhostBullet.Web.zip
 
 EXPOSE 5000
 
-CMD ["dotnet", "./OpenBullet2.Web.dll", "--urls=http://*:5000"]
+CMD ["dotnet", "./GhostBullet.Web.dll", "--urls=http://*:5000"]

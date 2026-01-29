@@ -21,11 +21,15 @@ namespace RuriLib.Functions.Http.Options
         public bool AlwaysSendContent { get; set; } = false;
         public bool DecodeHtml { get; set; } = false;
         public bool ReadResponseContent { get; set; } = true;
+
+        // TLS Client Options
+        public TlsClientOptions TlsClientOptions { get; set; } = new();
     }
 
     public enum HttpLibrary
     {
         SystemNet,
-        RuriLibHttp
+        RuriLibHttp,
+        TlsClient
     }
 }
