@@ -20,7 +20,7 @@ public class ConfigBrowserSettingsDto
     /// The extra command line arguments to pass to the browser's executable
     /// when opening a new browser.
     /// </summary>
-    public string CommandLineArgs { get; set; } = "--disable-notifications";
+    public string CommandLineArgs { get; set; } = "--disable-notifications --disable-features=PasswordLeakDetection,PasswordCheck --disable-save-password-bubble --disable-password-manager-reauthentication";
 
     /// <summary>
     /// Whether to ignore HTTPS-related errors.

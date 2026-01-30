@@ -213,6 +213,16 @@ namespace OpenBullet2.Native.ViewModels
             }
         }
 
+        public bool CloseBrowserOnFinish
+        {
+            get => Puppeteer.CloseBrowserOnFinish;
+            set
+            {
+                Puppeteer.CloseBrowserOnFinish = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<string> quitBrowserStatuses;
         public ObservableCollection<string> QuitBrowserStatuses
         {

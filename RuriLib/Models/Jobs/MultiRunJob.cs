@@ -312,13 +312,14 @@ namespace RuriLib.Models.Jobs
                     botData.Logger.Log(endMessage);
 
                     // Close the browser if needed
-                    if (botData.ConfigSettings.BrowserSettings.QuitBrowserStatuses.Contains(botData.STATUS))
+                    var browserSettings = botData.ConfigSettings.BrowserSettings;
+                    if (browserSettings.CloseBrowserOnFinish || browserSettings.QuitBrowserStatuses.Contains(botData.STATUS))
                     {
                         botData.DisposeObjectsExcept(new[] { "httpClient", "ironPyEngine" });
                     }
                     else
                     {
-                        botData.DisposeObjectsExcept(new[] { "puppeteer", "puppeteerPage", "puppeteerFrame", "httpClient", "ironPyEngine" });
+                        botData.DisposeObjectsExcept(new[] { "puppeteer", "puppeteerPage", "puppeteerFrame", "selenium", "httpClient", "ironPyEngine" });
                     }
                 }
 

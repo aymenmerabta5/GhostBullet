@@ -7,7 +7,9 @@ using RuriLib.Logging;
 using RuriLib.Models.Bots;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using ProxyType = RuriLib.Models.Proxies.ProxyType;
@@ -75,6 +77,30 @@ namespace RuriLib.Blocks.Puppeteer.Browser
                 }
             }
 
+            // Create a temporary user data directory with preferences to disable password leak detection
+            var userDataDir = Path.Combine(Path.GetTempPath(), "puppeteer_profile_" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(userDataDir);
+            var defaultDir = Path.Combine(userDataDir, "Default");
+            Directory.CreateDirectory(defaultDir);
+            
+            // Write Chrome preferences to disable password manager and leak detection
+            var preferences = new Dictionary<string, object>
+            {
+                ["credentials_enable_service"] = false,
+                ["profile"] = new Dictionary<string, object>
+                {
+                    ["password_manager_enabled"] = false,
+                    ["password_manager_leak_detection"] = false
+                }
+            };
+            var prefsJson = JsonSerializer.Serialize(preferences);
+            await File.WriteAllTextAsync(Path.Combine(defaultDir, "Preferences"), prefsJson);
+            
+            // Store the user data dir path for cleanup later
+            data.SetObject("puppeteer.userDataDir", userDataDir);
+            
+            args += $" --user-data-dir=\"{userDataDir}\"";
+
             // Configure the options
             var launchOptions = new LaunchOptions
             {
@@ -119,7 +145,25 @@ namespace RuriLib.Blocks.Puppeteer.Browser
             var browser = GetBrowser(data);
             await browser.CloseAsync();
             StopYoveProxyInternalServer(data);
+            CleanupUserDataDir(data);
             data.Logger.Log("Browser closed successfully!", LogColors.DarkSalmon);
+        }
+
+        private static void CleanupUserDataDir(BotData data)
+        {
+            try
+            {
+                var userDataDir = data.TryGetObject<string>("puppeteer.userDataDir");
+                if (!string.IsNullOrEmpty(userDataDir) && Directory.Exists(userDataDir))
+                {
+                    Directory.Delete(userDataDir, true);
+                    data.SetObject("puppeteer.userDataDir", null);
+                }
+            }
+            catch
+            {
+                // Ignore cleanup errors
+            }
         }
 
         [Block("Opens a new page in a new browser tab", name = "New Tab")]

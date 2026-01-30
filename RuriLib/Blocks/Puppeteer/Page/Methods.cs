@@ -1,4 +1,4 @@
-﻿using PuppeteerSharp;
+using PuppeteerSharp;
 using RuriLib.Attributes;
 using RuriLib.Logging;
 using RuriLib.Models.Bots;
@@ -203,17 +203,15 @@ namespace RuriLib.Blocks.Puppeteer.Page
             data.Logger.Log($"Set the viewport size to {width}x{height}", LogColors.DarkSalmon);
         }
 
-        [Block("Gets the full DOM of the page", name = "Get DOM")]
-        public static async Task<string> PuppeteerGetDOM(BotData data)
+        [Block("Gets the full DOM of the page and stores it in data.SOURCE", name = "Get DOM")]
+        public static async Task PuppeteerGetDOM(BotData data)
         {
             data.Logger.LogHeader();
 
             var page = GetPage(data);
-            var dom = await page.EvaluateExpressionAsync<string>("document.body.innerHTML");
+            data.SOURCE = await page.EvaluateExpressionAsync<string>("document.body.innerHTML");
 
-            data.Logger.Log($"Got the full page DOM", LogColors.DarkSalmon);
-            data.Logger.Log(dom, LogColors.DarkSalmon, true);
-            return dom;
+            data.Logger.Log($"Got the full page DOM ({data.SOURCE.Length} characters) and stored in data.SOURCE", LogColors.DarkSalmon);
         }
 
         [Block("Gets the cookies for a given domain from the browser. If the domain is empty, gets all cookies from the page.", name = "Get Cookies")]
@@ -231,6 +229,22 @@ namespace RuriLib.Blocks.Puppeteer.Page
 
             data.Logger.Log($"Got {cookies.Length} cookies for {(string.IsNullOrWhiteSpace(domain) ? "all domains" : domain)}", LogColors.DarkSalmon);
             return cookies.ToDictionary(c => c.Name, c => c.Value);
+        }
+
+        [Block("Forwards all cookies from the browser to data.COOKIES for use in HTTP requests", name = "Forward Cookies")]
+        public static async Task PuppeteerForwardCookies(BotData data)
+        {
+            data.Logger.LogHeader();
+
+            var page = GetPage(data);
+            var cookies = await page.GetCookiesAsync();
+
+            foreach (var cookie in cookies)
+            {
+                data.COOKIES[cookie.Name] = cookie.Value;
+            }
+
+            data.Logger.Log($"Forwarded {cookies.Length} cookies to data.COOKIES", LogColors.DarkSalmon);
         }
 
         [Block("Sets the cookies for a given domain in the browser page", name = "Set Cookies")]

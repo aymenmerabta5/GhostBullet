@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using RuriLib.Attributes;
 using RuriLib.Logging;
@@ -131,16 +131,14 @@ namespace RuriLib.Blocks.Selenium.Page
             data.Logger.Log($"Scrolled by {x} px to the right and {y} px to the bottom", LogColors.JuneBud);
         }
 
-        [Block("Gets the full DOM of the page", name = "Get DOM")]
-        public static string SeleniumGetDOM(BotData data)
+        [Block("Gets the full DOM of the page and stores it in data.SOURCE", name = "Get DOM")]
+        public static void SeleniumGetDOM(BotData data)
         {
             data.Logger.LogHeader();
 
-            var dom = GetBrowser(data).FindElement(By.TagName("body")).GetAttribute("innerHTML");
+            data.SOURCE = GetBrowser(data).FindElement(By.TagName("body")).GetAttribute("innerHTML");
 
-            data.Logger.Log("Got the full page DOM", LogColors.JuneBud);
-            data.Logger.Log(dom, LogColors.JuneBud, true);
-            return dom;
+            data.Logger.Log($"Got the full page DOM ({data.SOURCE.Length} characters) and stored in data.SOURCE", LogColors.JuneBud);
         }
 
         [Block("Gets the cookies for a given domain from the browser", name = "Get Cookies")]
@@ -154,6 +152,21 @@ namespace RuriLib.Blocks.Selenium.Page
 
             data.Logger.Log($"Got {cookies.Length} cookies for {domain}", LogColors.JuneBud);
             return cookies.ToDictionary(c => c.Name, c => c.Value);
+        }
+
+        [Block("Forwards all cookies from the browser to data.COOKIES for use in HTTP requests", name = "Forward Cookies")]
+        public static void SeleniumForwardCookies(BotData data)
+        {
+            data.Logger.LogHeader();
+
+            var cookies = GetBrowser(data).Manage().Cookies.AllCookies;
+
+            foreach (var cookie in cookies)
+            {
+                data.COOKIES[cookie.Name] = cookie.Value;
+            }
+
+            data.Logger.Log($"Forwarded {cookies.Count} cookies to data.COOKIES", LogColors.JuneBud);
         }
 
         [Block("Sets the cookies for a given domain in the browser page", name = "Set Cookies")]

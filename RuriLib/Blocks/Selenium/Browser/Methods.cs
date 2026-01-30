@@ -57,6 +57,11 @@ namespace RuriLib.Blocks.Selenium.Browser
                         chromeop.AddArgument("--disable-dev-shm-usage");
                     }
 
+                    // Disable password manager and leak detection to prevent popups
+                    chromeop.AddUserProfilePreference("credentials_enable_service", false);
+                    chromeop.AddUserProfilePreference("profile.password_manager_enabled", false);
+                    chromeop.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+
                     // Add stealth mode arguments for anti-bot detection
                     if (data.ConfigSettings.BrowserSettings.StealthMode)
                     {
@@ -71,10 +76,6 @@ namespace RuriLib.Blocks.Selenium.Browser
                         chromeop.AddArgument("--disable-infobars");
                         chromeop.AddArgument("--disable-features=IsolateOrigins,site-per-process");
                         chromeop.AddArgument("--window-size=1920,1080");
-                        
-                        // Disable automation extension via user profile preference
-                        chromeop.AddUserProfilePreference("credentials_enable_service", false);
-                        chromeop.AddUserProfilePreference("profile.password_manager_enabled", false);
                     }
 
                     if (data.ConfigSettings.BrowserSettings.Headless)
