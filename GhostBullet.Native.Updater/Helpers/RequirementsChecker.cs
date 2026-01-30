@@ -20,13 +20,13 @@ public static class RequirementsChecker
         var isRunning = false;
         
         await AnsiConsole.Status()
-            .StartAsync("[yellow]Checking if OpenBullet 2 is running...[/]", async ctx =>
+            .StartAsync("[yellow]Checking if GhostBullet is running...[/]", async ctx =>
             {
                 // Wait for 10 seconds for the process to close
                 var timeout = TimeSpan.FromSeconds(10);
-                while (Process.GetProcessesByName("OpenBullet2.Native").Length > 0 && timeout > TimeSpan.Zero)
+                while (Process.GetProcessesByName("GhostBullet.Native").Length > 0 && timeout > TimeSpan.Zero)
                 {
-                    ctx.Status("[yellow]OpenBullet 2 is running, waiting for it to close...[/]")
+                    ctx.Status("[yellow]GhostBullet is running, waiting for it to close...[/]")
                         .Spinner(Spinner.Known.Dots)
                         .Refresh();
                     
@@ -34,7 +34,7 @@ public static class RequirementsChecker
                     timeout -= TimeSpan.FromSeconds(1);
                 }
                 
-                if (Process.GetProcessesByName("OpenBullet2.Native").Length > 0)
+                if (Process.GetProcessesByName("GhostBullet.Native").Length > 0)
                 {
                     isRunning = true;
                 }
@@ -42,7 +42,7 @@ public static class RequirementsChecker
 
         if (isRunning)
         {
-            Utils.ExitWithError("OpenBullet 2 is currently running, please close it before updating!");
+            Utils.ExitWithError("GhostBullet is currently running, please close it before updating!");
         }
     }
 
@@ -58,12 +58,12 @@ public static class RequirementsChecker
         }
         
         var installRuntime = AnsiConsole.Prompt(
-            new ConfirmationPrompt($"The .NET Windows Desktop Runtime version {_dotnetVersion} or higher is required to run OpenBullet 2. " +
+            new ConfirmationPrompt($"The .NET Windows Desktop Runtime version {_dotnetVersion} or higher is required to run GhostBullet. " +
                                    "Do you want to download and install it now?"));
 
         if (!installRuntime)
         {
-            Utils.ExitWithError($"The .NET Windows Desktop Runtime version {_dotnetVersion} or higher is required to run OpenBullet 2. " +
+            Utils.ExitWithError($"The .NET Windows Desktop Runtime version {_dotnetVersion} or higher is required to run GhostBullet. " +
                                 $"Please install it from https://dotnet.microsoft.com/en-us/download/dotnet/{_dotnetVersion} " +
                                 "and relaunch the Updater");
         }

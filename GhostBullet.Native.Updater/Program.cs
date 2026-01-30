@@ -30,7 +30,7 @@ public static class Program
         // If the channel was not specified, ask the user
         options.Channel ??= Channel.AskForChannel();
         
-        // Check if OpenBullet2 is running
+        // Check if GhostBullet is running
         await RequirementsChecker.EnsureOb2NativeNotRunningAsync();
         
         // Make sure the user has the required .NET runtime installed
@@ -98,7 +98,7 @@ public static class Program
         await FileSystemHelper.ExtractArchiveAsync(buildStream);
         
         AnsiConsole.MarkupLine("[green]The update was completed successfully. " +
-                               "You may now restart your OpenBullet 2 instance![/]");
+                               "You may now restart your GhostBullet instance![/]");
         AnsiConsole.MarkupLine("[green]Press any key to exit...[/]");
         Console.ReadKey();
         Environment.Exit(0);

@@ -54,7 +54,7 @@ public class GitHubClient : IDisposable
                         
                 var remoteVersion = latest.Key;
                 var release = latest.Value;
-                var build = release["assets"]!.First(t => t["name"]!.ToObject<string>()! == "OpenBullet2.Native.zip");
+                var build = release["assets"]!.First(t => t["name"]!.ToObject<string>()! == "GhostBullet.Native.zip");
                 var downloadUrl = build["url"]!.ToString();
                 var size = build["size"]!.ToObject<double>();
                     

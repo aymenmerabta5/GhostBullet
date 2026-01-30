@@ -25,7 +25,7 @@
             <Run Foreground="{DynamicResource ForegroundCustom}"
                 Text="{Binding RemoteVersion}"/></Bold>.
             <LineBreak/>
-            OpenBullet 2 will close and reopen once the update is finished.
+            GhostBullet will close and reopen once the update is finished.
             <LineBreak/>
             <Bold>Are you sure you want to do this?</Bold>
         </TextBlock>

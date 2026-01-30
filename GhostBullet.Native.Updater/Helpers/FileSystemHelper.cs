@@ -32,7 +32,7 @@ public static class FileSystemHelper
 
     public static async Task CleanupInstallationFolderAsync()
     {
-        AnsiConsole.MarkupLine("[yellow]Cleaning up the OB2 folder...[/]");
+        AnsiConsole.MarkupLine("[yellow]Cleaning up the GhostBullet folder...[/]");
         
         // The build-files.txt file contains a list of all the files in the current build.
         // We will delete all those files and folders and clean up the directory.

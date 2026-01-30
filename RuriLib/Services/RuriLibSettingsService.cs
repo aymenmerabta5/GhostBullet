@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using RuriLib.Helpers;
 using RuriLib.Models.Environment;
 using RuriLib.Models.Settings;
@@ -104,6 +104,13 @@ Regex=^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}
 Verify=True
 Separator=
 Slices=URL
+
+[WORDLIST TYPE]
+Name=Cookies
+Regex=^.*$
+Verify=False
+Separator=
+Slices=COOKIEPATH
 
 [CUSTOM STATUS]
 Name=CUSTOM

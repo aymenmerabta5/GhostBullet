@@ -83,7 +83,7 @@ namespace OpenBullet2.Native
             // EF
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("OpenBullet2.Core")), ServiceLifetime.Transient);
+                b => b.MigrationsAssembly("GhostBullet.Core")), ServiceLifetime.Transient);
 
             // Repositories
             services.AddSingleton<IProxyRepository, DbProxyRepository>();

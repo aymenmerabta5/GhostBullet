@@ -87,7 +87,7 @@ namespace OpenBullet2.Native
             configsPage = new();
 
             updateService = SP.GetService<UpdateService>();
-            Title = $"OpenBullet 2 - {updateService.CurrentVersion} [{updateService.CurrentVersionType}]";
+            Title = $"GhostBullet - {updateService.CurrentVersion} [{updateService.CurrentVersionType}]";
 
             // Set the theme
             var obSettingsService = SP.GetService<OpenBulletSettingsService>();

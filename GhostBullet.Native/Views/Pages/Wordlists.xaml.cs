@@ -1,4 +1,4 @@
-﻿using OpenBullet2.Core.Entities;
+using OpenBullet2.Core.Entities;
 using OpenBullet2.Native.Helpers;
 using OpenBullet2.Native.Services;
 using OpenBullet2.Native.ViewModels;
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -42,6 +43,17 @@ namespace OpenBullet2.Native.Views.Pages
 
         private void Add(object sender, RoutedEventArgs e)
             => new MainDialog(new AddWordlistDialog(this), "Add a wordlist").ShowDialog();
+
+        private void ImportCookies(object sender, RoutedEventArgs e)
+            => new MainDialog(new ImportCookiesDialog(this), "Import Cookie Paths").ShowDialog();
+
+        /// <summary>
+        /// Refreshes the wordlist list after an import operation.
+        /// </summary>
+        public async Task RefreshAfterImport()
+        {
+            await vm.RefreshListAsync();
+        }
 
         private async void DeleteSelected(object sender, RoutedEventArgs e)
         {

@@ -4,8 +4,8 @@ namespace OpenBullet2.Native.Updater;
 
 public class CliOptions
 {
-    [Option('r', "repository", Required = false, HelpText = "The repository, e.g. openbullet/OpenBullet2")]
-    public string Repository { get; set; } = "openbullet/OpenBullet2";
+    [Option('r', "repository", Required = false, HelpText = "The repository, e.g. ghostbullet/GhostBullet")]
+    public string Repository { get; set; } = "ghostbullet/GhostBullet";
     
     [Option('u', "username", Required = false, HelpText = "The username to authenticate to the repository if private")]
     public string? Username { get; set; }

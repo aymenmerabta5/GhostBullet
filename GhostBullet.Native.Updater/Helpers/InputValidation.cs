@@ -9,7 +9,7 @@ public static partial class InputValidation
         // Make sure the repository is in the right format
         if (!RepositoryRegex().IsMatch(repository))
         {
-            Utils.ExitWithError("The repository must be in the format owner/repo (e.g. openbullet/OpenBullet2)");
+            Utils.ExitWithError("The repository must be in the format owner/repo (e.g. ghostbullet/GhostBullet)");
         }
     }
 

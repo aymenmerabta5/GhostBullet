@@ -7,7 +7,7 @@
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:uc="clr-namespace:OpenBullet2.Native.Controls"
-      xmlns:ho="clr-namespace:OpenBullet2.Core.Models.Hits;assembly=OpenBullet2.Core"
+      xmlns:ho="clr-namespace:OpenBullet2.Core.Models.Hits;assembly=GhostBullet.Core"
       mc:Ignorable="d" 
       d:DesignHeight="1050" d:DesignWidth="1200"
       Title="MultiRunJobOptionsDialog">

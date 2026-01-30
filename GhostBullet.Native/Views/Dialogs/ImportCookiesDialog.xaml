@@ -1,0 +1,52 @@
+<Page x:Class="OpenBullet2.Native.Views.Dialogs.ImportCookiesDialog"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+      d:DesignHeight="280" d:DesignWidth="400"
+      Title="Import Cookie Paths">
+
+    <Grid Width="380" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Margin="0 0 0 15" TextWrapping="Wrap" Foreground="{DynamicResource ForegroundMain}">
+            Scan a folder for cookie files (*.txt files in paths containing "cookie") 
+            and create a Cookies wordlist. Use with the "Load Cookies" block in your config:
+            1. Select this wordlist in job settings (uses &lt;COOKIEPATH&gt; variable)
+            2. Add "Load Cookies" block with domain filter
+            3. HTTP requests will automatically use loaded cookies
+        </TextBlock>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Folder:" VerticalAlignment="Center"/>
+        <TextBox x:Name="folderTextbox" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Margin="5" IsReadOnly="True"/>
+        <iconPacks:PackIconRemixIcon Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="White" Kind="Folder2Fill" MouseDown="SelectFolder" Cursor="Hand" ToolTip="Select folder to scan"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Name:" VerticalAlignment="Center"/>
+        <TextBox x:Name="nameTextbox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="5" ToolTip="Name for the generated wordlist"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Purpose:" VerticalAlignment="Center"/>
+        <TextBox x:Name="purposeTextbox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="5" ToolTip="Optional description"/>
+
+        <TextBlock x:Name="statusText" Grid.Row="4" Grid.ColumnSpan="3" Margin="5 10" Foreground="{DynamicResource ForegroundCustom}" TextWrapping="Wrap"/>
+
+        <ProgressBar x:Name="progressBar" Grid.Row="5" Grid.ColumnSpan="3" Height="20" Margin="5" Visibility="Collapsed"/>
+
+        <Button Grid.Row="6" Grid.ColumnSpan="3" x:Name="acceptButton" Content="SCAN AND IMPORT" Click="Accept" Style="{StaticResource StyledSuccessButton}" Margin="5" VerticalAlignment="Bottom"/>
+    </Grid>
+</Page>

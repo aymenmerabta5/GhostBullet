@@ -1,4 +1,4 @@
-﻿<Page x:Class="OpenBullet2.Native.Views.Pages.Wordlists"
+<Page x:Class="OpenBullet2.Native.Views.Pages.Wordlists"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,6 +20,12 @@
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterialDesign Kind="Add" />
                     <TextBlock VerticalAlignment="Center" Margin="5 0">Add</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="importCookiesButton" Click="ImportCookies" Margin="0 5 5 5" Style="{StaticResource StyledPrimaryButton}" ToolTip="Scan a folder for cookie files and create a wordlist of paths">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Cookie" />
+                    <TextBlock VerticalAlignment="Center" Margin="5 0">Import Cookies</TextBlock>
                 </StackPanel>
             </Button>
             <Button x:Name="deleteButton" Click="DeleteSelected" Margin="0 5 5 5" Style="{StaticResource StyledDangerButton}" >
